@@ -13,13 +13,13 @@ void calculaMatrizes(int mA[][L], int mC[][L], int mR[][L]);
 void zeraMatrizR(int mR[][L]);
 int maiorValorDiagonalPrincipal(int matriz[][L]);
 
-extern int func_nasm(int, int[L][L], int [L][L], int[L][L], int); // função para multiplicão de duas matrizes seguindo a eq. : (A*C)*3 
+extern int func_nasm(int, int[L][L], int[L][L], int[L][L]); // função para multiplicão de duas matrizes seguindo a eq. : (A*C)*3 
 																	// e obtem o maior valor da diagonal principal da mR
 
 
 int main(){
 	int mA[L][L], mC[L][L], mR[L][L];
-	int maior;
+	int maior = 2;
 	
 	zeraMatrizR(mR); //anula matriz resultante
 	populaMatriz(mA);
@@ -30,11 +30,11 @@ int main(){
 	exibeMatriz(mC);
 
 	//calculo com função nasm
-	func_nasm(L, mA, mC, mR, maior);
+	maior = func_nasm(L, mA, mC, mR);
 	printf("-----------nasm-----------\n");
 	printf("Matriz Resultante calculada em nasm:\n");
 	exibeMatriz(mR);
-	//printf("Maior valor da diagonal principal: %d\n", maior);
+	printf("Maior valor da diagonal principal: %d\n", maior);
 
 	zeraMatrizR(mR); //anula matriz resultante para o proximo calculo
 

@@ -2,8 +2,9 @@
 i dd 0
 j dd 0
 k dd 0
-sum dd 0 ; acumulador das somas
-tam dd 0 ; tamanho das matrizes	
+sum dd 0	; acumulador das somas
+tam dd 0 	; tamanho das matrizes	
+
 
 
 	SECTION .text
@@ -29,6 +30,9 @@ func_nasm:
 
 	mov ebx, [ebp + 8]  ; tamanho matriz
 	mov [tam], ebx 		;passa o tamanho para a variavel tam
+
+
+	;----------------------------------multiplica as duas matrizes----------------------------------
 
 	mov ebx, [ebp + 12]		;ebx aponta para matriz A
 	mov ecx, [ebp + 16]		;ecx aponta para matriz C
@@ -81,8 +85,30 @@ func_nasm:
 	fimi:							; senão sai do fori	
 									; fim do calculo
 
+	;--------------------------Pega o maior valor da diagonal principal da Matriz resultante --------------------------------
+
+	xor ecx, ecx					; zera o ecx
+
+	mov ebx, [ebp + 20]				; aponta para a matriz resultante
+
+	mov [i], byte 0					; coloca i em zero
+	for_maior:						; laço para obter o maior valor da diagonal principal
+		pegaPosicao [tam], i, i 	; obtem a posição de mR[i][i]
+		cmp [ebx + eax], ecx		; compara mR[i][i] com maior
+		jle fim_if					; se for menor pula para fim_if	
+			mov ecx, [ebx + eax]    ; senão maior <- mR[i][i] 
+		fim_if:
+
+		mov eax, [tam]				; eax = tam
+		inc byte [i]				; i++
+		cmp [i], eax				; compara i com tamanho
+		jl for_maior				; se for menor volta para for_maior
+	fim_maior:						; senão sai do for_maior
+
+	mov eax, ecx					; passando para eax o maior valor, que ira retornar para o sistema (para retornar tem q ser o eax!)
+
 	pop ebx
 	mov esp, ebp					; restaurando pilha
 	pop ebp
-	ret        						; fim	
+	ret        						; fim do programa, retornando para o trabalho.c	
 
