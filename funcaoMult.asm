@@ -21,8 +21,8 @@ tam dd 0 ; tamanho das matrizes
 	pop ebx
 %endmacro
 
-global func_asm
-func_asm:
+global nasm_mult
+nasm_mult:
 	push ebp		;Stackframe
 	mov ebp, esp    ;
 	push ebx
