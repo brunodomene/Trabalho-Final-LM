@@ -14,7 +14,7 @@ void zeraMatrizR(int mR[][L]);
 int maiorValorDiagonalPrincipal(int matriz[][L]);
 
 extern int func_nasm(int, int[L][L], int[L][L], int[L][L]); // função para multiplicão de duas matrizes seguindo a eq. : (A*C)*3 
-																	// e obtem o maior valor da diagonal principal da mR
+extern int func_gas(int, int[L][L], int[L][L], int[L][L]); // função em gas para multiplicação de duas matrizes																	
 
 
 int main(){
@@ -37,6 +37,17 @@ int main(){
 	printf("Maior valor da diagonal principal: %d\n", maior);
 
 	zeraMatrizR(mR); //anula matriz resultante para o proximo calculo
+	maior = 0; 		//zera maior para proximo calculo
+
+	//calculo com função gas
+	maior = func_gas(L, mA, mC, mR);
+	printf("\n-----------gas-----------\n");
+	printf("Matriz Resultante calculada em gas:\n");
+	exibeMatriz(mR);
+	printf("Maior valor da diagonal principal: %d\n", maior);
+
+	zeraMatrizR(mR); //anula matriz resultante para o proximo calculo
+	maior = 0; 		//zera maior para proximo calculo
 
 	//calculo com função c++
 	calculaMatrizes(mA,mC,mR); //3*(A * C)
